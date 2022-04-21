@@ -2,6 +2,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+p {
+    margin: 10px 0;
+}
+
 h1 {
     text-align: center;
 }
@@ -10,7 +14,8 @@ label,
 input,
 option,
 select,
-button {
+button,
+p {
     font-size: 20px;
 }
 
@@ -18,4 +23,30 @@ button {
     text-align: center;
     font-size: 30px;
     color: red;
+}
+
+#second_task {
+    display: flex;
+}
+
+.source {
+    margin-left: 40px;
+}
+
+#second_task select {
+    display: block;
+}
+
+#second_form input,
+#second_form label {
+    margin-top: 10px;
+    display: block;
+}
+
+.source button {
+    margin-top: 10px;
+}
+
+.close {
+    display: none;
 }

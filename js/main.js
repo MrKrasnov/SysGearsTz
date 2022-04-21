@@ -54,4 +54,62 @@ add_value.onclick = () => {
     }
 }
 
-//second Task
+//second task
+import FormHandler from './secondTask/FormHandler.js';
+import CheckboxHandler from './secondTask/CheckboxHandler.js';
+import Filter from './secondTask/filter/Filter.js';
+import FilterInput from './secondTask/filter/FilterInput.js';
+import FilterCheck from './secondTask/filter/FilterCheck.js';
+
+//отправка формы в базу данных
+const db = [];
+let second_form = document.getElementById("second_form");
+
+second_form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let data = Object.fromEntries(new FormData(e.target).entries());
+    let handler = new FormHandler(data);
+    let result = handler.handler();
+    db.push(result);
+    console.log(db);
+});
+// cмена мода
+document.getElementById("mode").addEventListener('change', (e) => {
+    if (e.target.value == 'boxes') {
+        document.querySelector('.search_name').value = '';
+        document.querySelector('.input_name').classList.add("close");
+        document.querySelector('.include').classList.remove("close");
+    } else {
+        document.querySelector('.input_name').classList.remove("close");
+        document.querySelector('.include').classList.add("close");
+        let checkboxes = new CheckboxHandler(document.querySelectorAll('.check'));
+        checkboxes.checkboxesOff()
+    }
+})
+// показ фильтра
+document.querySelector('.show').onclick = () => {
+    let checkboxes = new CheckboxHandler(document.querySelectorAll(".check"));
+    const checkOn = checkboxes.getCheckedCheckBoxes(); // чекс боксы
+    const sort = document.getElementById('sort').value; // списки
+    let input = document.querySelector('.search_name').value;
+    const key = document.getElementById('key').value;
+    if (input == '') input = false;
+
+    // получаем полученные данные в классе
+    if (input) {
+        let filter = new FilterInput(sort, key, input);
+        let config = JSON.stringify(filter.filterOn())
+        console.log(config);
+    } else if (checkOn) {
+        let filter = new FilterCheck(sort, checkOn);
+        let config = JSON.stringify(filter.filterOn())
+        console.log(config);
+    } else {
+        let filter = new Filter(sort);
+        let config = JSON.stringify(filter.filterOn())
+        console.log(config);
+    }
+
+}
+
+//third Task

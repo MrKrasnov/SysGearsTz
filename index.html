@@ -47,7 +47,69 @@
     <div>
         <h1>Second Task</h1>
         <hr>
-        <div id="second_task"></div>
+        <div id="second_task">
+            <div>
+                <form id="second_form">
+                    <label for="username">What are your name?</label>
+                    <input type="text" name="username">
+                    <label for="email">What are your email?</label>
+                    <input type="text" name="email">
+                    <input type="submit" id="submit" value="submit">
+                </form>
+            </div>
+            <div class="source">
+
+
+                <div>
+                    <p>Mode</p>
+                    <hr>
+                    <select id="mode">
+                        <option value="name">Search name</option>
+                        <option value="boxes">Checkboxes</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <p>Sort</p>
+                    <hr>
+                    <select id="sort">
+                        <option value="user">user</option>
+                        <option value="email">email</option>
+                        <option value="rating">rating</option>
+                        <option value="disabled">disabled</option>
+                    </select>
+                </div>
+
+
+
+                <div class="include close">
+                    <hr>
+                    <p>Include</p>
+                    <hr>
+                    <input class="check" type="checkbox" value="rating" id="rating" name="rating">
+                    <label for="rating">Rating</label>
+                    <input class="check" type="checkbox" value="disabled" id="disabled" name="disabled">
+                    <label for="disabled">Disabled</label>
+                </div>
+
+                <div class="input_name">
+                    <hr>
+                    <p>Search</p>
+                    <hr>
+                    <select id="key">
+                        <option value="user">user</option>
+                        <option value="email">email</option>
+                        <option value="rating">rating</option>
+                        <option value="disabled">disabled</option>
+                    </select>
+                    <input type="text" class="search_name">
+                </div>
+
+
+                <button class="show">show on</button>
+            </div>
+        </div>
     </div>
     <div>
         <h1>Third Task</h1>
