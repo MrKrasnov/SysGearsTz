@@ -1,3 +1,7 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 h1 {
     text-align: center;
 }
@@ -8,4 +12,10 @@ option,
 select,
 button {
     font-size: 20px;
+}
+
+.out-1 {
+    text-align: center;
+    font-size: 30px;
+    color: red;
 }

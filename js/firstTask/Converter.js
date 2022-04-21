@@ -9,6 +9,16 @@ export default class Converter {
         let int = rounding(+distance.value);
         let result = {};
 
+        function defaultSending() {
+            let obj = {
+                unit: distance.unit,
+                value: int,
+                convert_to: convert_to.convert_to,
+            };
+
+            return obj;
+        }
+
         function sending() {
             let obj = {
                 unit: convert_to.convert_to,
@@ -59,33 +69,8 @@ export default class Converter {
                 result.km = rounding(int / 100000);
                 result.ft = rounding(int * 0.032808);
                 return sending();
-            case 'yd':
-                result.mm = rounding(int / 0.0010936);
-                result.m = rounding(int / 1.0936);
-                result.in = rounding(int * 36);
-                result.cm = rounding(int / 0.010936);
-                result.yd = int;
-                result.km = rounding(int / 1093.6);
-                result.ft = rounding(int * 3);
-                return sending();
-            case 'km':
-                result.mm = rounding(int * 1000000);
-                result.m = rounding(int * 1000);
-                result.in = rounding(int * 39370);
-                result.cm = rounding(int * 100000);
-                result.yd = rounding(int * 1093.6);
-                result.km = int;
-                result.ft = rounding(int * 3280.8);
-                return sending();
-            case 'mm':
-                result.mm = int;
-                result.m = rounding(int / 1000);
-                result.in = rounding(int * 0.039370);
-                result.cm = rounding(int / 10);
-                result.yd = rounding(int * 0.0010936);
-                result.km = rounding(int / 1000000);
-                result.ft = rounding(int * 0.0032808);
-                return sending();
+            default:
+                return defaultSending();
         }
 
     }
