@@ -30,34 +30,27 @@ first_form.addEventListener('submit', (e) => {
     }
 });
 
+
+function adderElements(el, text) {
+    let above_option = document.createElement("option");
+    above_option.setAttribute("value", el);
+    above_option.textContent = text;
+    document.getElementById(el).remove();
+    let option_clone = above_option.cloneNode(true);
+    unit.append(above_option);
+    convert_to.append(option_clone);
+}
+
 let add_value = document.getElementById("add_value");
 add_value.onclick = () => {
     let option = document.getElementById('add_to');
 
     if (option.value == "mm") {
-        let above_option = document.createElement("option");
-        above_option.setAttribute("value", "mm");
-        above_option.textContent = "millimeters";
-        document.getElementById("mm").remove();
-        let option_clone = above_option.cloneNode(true);
-        unit.append(above_option);
-        convert_to.append(option_clone);
+        adderElements(option.value, "millimeters");
     } else if (option.value == "yd") {
-        let above_option = document.createElement("option");
-        above_option.setAttribute("value", "yd");
-        above_option.textContent = "yards";
-        document.getElementById("yd").remove();
-        let option_clone = above_option.cloneNode(true);
-        unit.append(above_option);
-        convert_to.append(option_clone);
+        adderElements(option.value, "yards");
     } else if (option.value == "km") {
-        let above_option = document.createElement("option");
-        above_option.setAttribute("value", "km");
-        above_option.textContent = "kilometers";
-        document.getElementById("km").remove();
-        let option_clone = above_option.cloneNode(true);
-        unit.append(above_option);
-        convert_to.append(option_clone);
+        adderElements(option.value, "kilometers");
     }
 }
 
