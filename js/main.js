@@ -30,7 +30,6 @@ first_form.addEventListener('submit', (e) => {
     }
 });
 
-
 function adderElements(el, text) {
     let above_option = document.createElement("option");
     above_option.setAttribute("value", el);
@@ -60,6 +59,7 @@ import CheckboxHandler from './secondTask/CheckboxHandler.js';
 import Filter from './secondTask/filter/Filter.js';
 import FilterInput from './secondTask/filter/FilterInput.js';
 import FilterCheck from './secondTask/filter/FilterCheck.js';
+import DataСollector from './secondTask/DataСollector.js';
 
 //отправка формы в базу данных
 const db = [];
@@ -99,15 +99,18 @@ document.querySelector('.show').onclick = () => {
     if (input) {
         let filter = new FilterInput(sort, key, input);
         let config = JSON.stringify(filter.filterOn())
-        console.log(config);
+        let set = new DataСollector(db, config);
+        console.log(set.creatingRequest());
     } else if (checkOn) {
         let filter = new FilterCheck(sort, checkOn);
         let config = JSON.stringify(filter.filterOn())
-        console.log(config);
+        let set = new DataСollector(db, config);
+        console.log(set.creatingRequest());
     } else {
         let filter = new Filter(sort);
         let config = JSON.stringify(filter.filterOn())
-        console.log(config);
+        let set = new DataСollector(db, config);
+        console.log(set.creatingRequest());
     }
 
 }
