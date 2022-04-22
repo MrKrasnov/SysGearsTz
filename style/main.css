@@ -50,3 +50,21 @@ p {
 .close {
     display: none;
 }
+
+.profiles {
+    display: block;
+    margin: 0 20px;
+    height: 85px;
+}
+
+.profiles div {
+    margin: 20px;
+}
+
+.profiles p {
+    border: 1px solid orange;
+}
+
+.hide {
+    display: none;
+}

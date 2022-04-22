@@ -7,7 +7,7 @@ export default class FilterCheck extends Filter {
     }
     filterOn() {
         let obj = super.filterOn();
-        // {"condition":{"sort_by":["user"]}}
+
         obj.condition.exclude = [];
         this.check.forEach(element => {
             obj.condition.exclude.push({ [element]: true });

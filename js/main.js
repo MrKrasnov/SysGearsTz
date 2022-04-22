@@ -62,8 +62,8 @@ import FilterCheck from './secondTask/filter/FilterCheck.js';
 import ClassToggle from './secondTask/ClassToggle.js';
 import DataСollector from './secondTask/DataСollector.js';
 import ReaderByRequest from './secondTask/Request/ReaderByRequest.js';
+import Show from './secondTask/show/Show.js';
 
-//отправка формы в базу данных
 const db = [];
 let second_form = document.getElementById("second_form");
 
@@ -74,7 +74,7 @@ second_form.addEventListener('submit', (e) => {
     let result = handler.handler();
     db.push(result);
 });
-// cмена мода
+
 document.getElementById("mode").addEventListener('change', (e) => {
     if (e.target.value == 'boxes') {
         document.querySelector('.search_name').value = '';
@@ -103,41 +103,30 @@ function toggleCheck(e, i) {
     }
 }
 
-// показ фильтра
 document.querySelector('.show').onclick = () => {
     let checkboxes = new CheckboxHandler(document.querySelectorAll(".check"));
-    const checkOn = checkboxes.getCheckedCheckBoxes(); // чекс боксы
-    const sort = document.getElementById('sort').value; // списки
+    const checkOn = checkboxes.getCheckedCheckBoxes();
+    const sort = document.getElementById('sort').value;
     let input = document.querySelector('.search_name').value;
     const key = document.getElementById('key').value;
     if (input == '') input = false;
 
-    // получаем полученные данные в классе
+    let filter;
     if (input) {
-        let filter = new FilterInput(sort, key, input);
-        let config = JSON.stringify(filter.filterOn())
-        let set = new DataСollector(db, config);
+        filter = new FilterInput(sort, key, input);
 
-        // JSON форма
-        let resultJSON = new ReaderByRequest(set.creatingRequest());
-        console.log(resultJSON.getRequestObj());
     } else if (checkOn) {
-        let filter = new FilterCheck(sort, checkOn);
-        let config = JSON.stringify(filter.filterOn())
-        let set = new DataСollector(db, config);
+        filter = new FilterCheck(sort, checkOn);
 
-        // JSON форма
-        let resultJSON = new ReaderByRequest(set.creatingRequest());
-        console.log(resultJSON.getRequestObj());
     } else {
-        let filter = new Filter(sort);
-        let config = JSON.stringify(filter.filterOn())
-        let set = new DataСollector(db, config);
-        // JSON форма
-        let resultJSON = new ReaderByRequest(set.creatingRequest());
-        console.log(resultJSON.getRequestObj());
+        filter = new Filter(sort);
     }
-
+    let config = JSON.stringify(filter.filterOn())
+    let set = new DataСollector(db, config);
+    let resultJSON = new ReaderByRequest(set.creatingRequest());
+    let show = new Show(resultJSON.getRequestObj(), document.querySelectorAll('.profiles'))
+    show.showHide()
+    show.showCreateDiv();
 }
 
 //third Task

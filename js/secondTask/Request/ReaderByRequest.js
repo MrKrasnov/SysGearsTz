@@ -6,8 +6,8 @@ export default class ReaderByRequest {
     getRequestObj() {
         let obj = JSON.parse(this.config);
         let config = obj["condition"];
-        let profiles = obj["data"]; // users
-        let sort_by = config["sort_by"][0]; // name , email, rating, disabled
+        let profiles = obj["data"];
+        let sort_by = config["sort_by"][0];
 
         if (profiles.length == 0) {
             let result = {
