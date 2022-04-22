@@ -50,8 +50,8 @@
         <div id="second_task">
             <div>
                 <form id="second_form">
-                    <label for="username">What are your name?</label>
-                    <input type="text" name="username">
+                    <label for="name">What are your name?</label>
+                    <input type="text" name="name">
                     <label for="email">What are your email?</label>
                     <input type="text" name="email">
                     <input type="submit" id="submit" value="submit">
@@ -74,10 +74,10 @@
                     <p>Sort</p>
                     <hr>
                     <select id="sort">
-                        <option value="user">user</option>
+                        <option value="name">user</option>
                         <option value="email">email</option>
-                        <option value="rating">rating</option>
-                        <option value="disabled">disabled</option>
+                        <option class="extraOption close" value="rating">rating</option>
+                        <option class="extraOption close" value="disabled">disabled</option>
                     </select>
                 </div>
 
@@ -98,10 +98,8 @@
                     <p>Search</p>
                     <hr>
                     <select id="key">
-                        <option value="user">user</option>
+                        <option value="name">user</option>
                         <option value="email">email</option>
-                        <option value="rating">rating</option>
-                        <option value="disabled">disabled</option>
                     </select>
                     <input type="text" class="search_name">
                 </div>

@@ -59,7 +59,9 @@ import CheckboxHandler from './secondTask/CheckboxHandler.js';
 import Filter from './secondTask/filter/Filter.js';
 import FilterInput from './secondTask/filter/FilterInput.js';
 import FilterCheck from './secondTask/filter/FilterCheck.js';
+import ClassToggle from './secondTask/ClassToggle.js';
 import DataСollector from './secondTask/DataСollector.js';
+import ReaderByRequest from './secondTask/Request/ReaderByRequest.js';
 
 //отправка формы в базу данных
 const db = [];
@@ -71,7 +73,6 @@ second_form.addEventListener('submit', (e) => {
     let handler = new FormHandler(data);
     let result = handler.handler();
     db.push(result);
-    console.log(db);
 });
 // cмена мода
 document.getElementById("mode").addEventListener('change', (e) => {
@@ -82,10 +83,26 @@ document.getElementById("mode").addEventListener('change', (e) => {
     } else {
         document.querySelector('.input_name').classList.remove("close");
         document.querySelector('.include').classList.add("close");
+        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
+        classToggle.divHide();
         let checkboxes = new CheckboxHandler(document.querySelectorAll('.check'));
         checkboxes.checkboxesOff()
     }
 })
+
+document.querySelectorAll(".check")[0].addEventListener('change', (e) => toggleCheck(e, 0))
+document.querySelectorAll(".check")[1].addEventListener('change', (e) => toggleCheck(e, 1))
+
+function toggleCheck(e, i) {
+    if (e.target.checked) {
+        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
+        classToggle.divTargetShow(i);
+    } else {
+        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
+        classToggle.divTargetHide(i);
+    }
+}
+
 // показ фильтра
 document.querySelector('.show').onclick = () => {
     let checkboxes = new CheckboxHandler(document.querySelectorAll(".check"));
@@ -100,19 +117,29 @@ document.querySelector('.show').onclick = () => {
         let filter = new FilterInput(sort, key, input);
         let config = JSON.stringify(filter.filterOn())
         let set = new DataСollector(db, config);
-        console.log(set.creatingRequest());
+
+        // JSON форма
+        let resultJSON = new ReaderByRequest(set.creatingRequest());
+        console.log(resultJSON.getRequestObj());
     } else if (checkOn) {
         let filter = new FilterCheck(sort, checkOn);
         let config = JSON.stringify(filter.filterOn())
         let set = new DataСollector(db, config);
-        console.log(set.creatingRequest());
+
+        // JSON форма
+        let resultJSON = new ReaderByRequest(set.creatingRequest());
+        console.log(resultJSON.getRequestObj());
     } else {
         let filter = new Filter(sort);
         let config = JSON.stringify(filter.filterOn())
         let set = new DataСollector(db, config);
-        console.log(set.creatingRequest());
+        // JSON форма
+        let resultJSON = new ReaderByRequest(set.creatingRequest());
+        console.log(resultJSON.getRequestObj());
     }
 
 }
 
 //third Task
+
+

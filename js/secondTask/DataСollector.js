@@ -17,7 +17,7 @@ export default class DataСollector {
         let result = JSON.parse(this.config);
         result.data = data;
 
-        return result;
+        return JSON.stringify(result);
     }
 
 }

@@ -12,7 +12,6 @@ export default class FilterCheck extends Filter {
         this.check.forEach(element => {
             obj.condition.exclude.push({ [element]: true });
         });
-
         return obj;
     }
 }
