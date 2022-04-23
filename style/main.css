@@ -68,3 +68,12 @@ p {
 .hide {
     display: none;
 }
+
+#third_task {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.third_task {
+    width: 100%;
+}
