@@ -3,14 +3,15 @@ export default class QuestionsSet {
         this.questions = questions;
     }
     createScenaries() {
-
         const data = JSON.parse(this.questions),
             firstList = data.firstList,
             secondList = data.secondList;
+
         let firstListQuestion = [],
             secondListQuestion = [],
             firstAnswers = [],
             secondAnswers = [];
+
         for (let key in firstList) {
             firstListQuestion.push(key);
             firstAnswers.push(firstList[key]);

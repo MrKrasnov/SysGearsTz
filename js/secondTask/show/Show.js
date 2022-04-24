@@ -18,13 +18,16 @@ export default class Show {
             if (item.hasOwnProperty('disabled') & item.hasOwnProperty('rating')) {
                 setArray.push([item.name, item.email, `Disabled: ${item.disabled}`, `Rating: ${item.rating}`]);
                 continue;
-            } else if (item.hasOwnProperty('disabled')) {
+            }
+            else if (item.hasOwnProperty('disabled')) {
                 setArray.push([item.name, item.email, `Disabled: ${item.disabled}`]);
                 continue;
-            } else if (item.hasOwnProperty('rating')) {
+            }
+            else if (item.hasOwnProperty('rating')) {
                 setArray.push([item.name, item.email, `Rating: ${item.rating}`]);
                 continue;
-            } else {
+            }
+            else {
                 setArray.push([item.name, item.email]);
             }
         }
@@ -48,6 +51,8 @@ export default class Show {
             </div>`;
             document.getElementById('second_task').append(div);
         }
+
         return result;
     }
+
 }

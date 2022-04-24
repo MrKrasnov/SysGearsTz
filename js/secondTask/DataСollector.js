@@ -5,9 +5,11 @@ export default class DataСollector {
     }
     creatingRequest() {
         let data;
+
         if (this.db.length == 0) {
             data = [];
-        } else {
+        }
+        else {
             data = [];
             for (let item of this.db) {
                 data.push(JSON.parse(item));

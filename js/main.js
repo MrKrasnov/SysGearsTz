@@ -4,14 +4,13 @@ import Converter from './firstTask/Converter.js';
 import ConverterUpper from './firstTask/ConverterUpper.js';
 
 const unit = document.getElementById('unit'),
-    convert_to = document.getElementById('convert_to'),
-    number_unit = document.getElementById('number');
+    convert_to = document.getElementById('convert_to');
 
-number_unit.onkeydown = (event) => {
+document.getElementById('number').onkeydown = (event) => {
     return (event.key >= '0' && event.key <= '9') || event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'Delete' || event.key == 'Backspace' || event.key == '.';
 }
-let first_form = document.getElementById("first_form");
-first_form.addEventListener('submit', (e) => {
+
+document.getElementById("first_form").addEventListener('submit', (e) => {
     e.preventDefault();
     let data = Object.fromEntries(new FormData(e.target).entries());
     let pushEntries = new Quantities(data.unit, data.value, data.convert_to);
@@ -30,27 +29,29 @@ first_form.addEventListener('submit', (e) => {
     }
 });
 
+document.getElementById("add_value").onclick = () => {
+    let option = document.getElementById('add_to');
+
+    if (option.value == "mm") {
+        adderElements(option.value, "millimeters");
+    }
+    else if (option.value == "yd") {
+        adderElements(option.value, "yards");
+    }
+    else if (option.value == "km") {
+        adderElements(option.value, "kilometers");
+    }
+}
+
 function adderElements(el, text) {
     let above_option = document.createElement("option");
     above_option.setAttribute("value", el);
     above_option.textContent = text;
     document.getElementById(el).remove();
+
     let option_clone = above_option.cloneNode(true);
     unit.append(above_option);
     convert_to.append(option_clone);
-}
-
-let add_value = document.getElementById("add_value");
-add_value.onclick = () => {
-    let option = document.getElementById('add_to');
-
-    if (option.value == "mm") {
-        adderElements(option.value, "millimeters");
-    } else if (option.value == "yd") {
-        adderElements(option.value, "yards");
-    } else if (option.value == "km") {
-        adderElements(option.value, "kilometers");
-    }
 }
 
 //second task
@@ -65,9 +66,7 @@ import ReaderByRequest from './secondTask/Request/ReaderByRequest.js';
 import Show from './secondTask/show/Show.js';
 
 const db = [];
-let second_form = document.getElementById("second_form");
-
-second_form.addEventListener('submit', (e) => {
+document.getElementById("second_form").addEventListener('submit', (e) => {
     e.preventDefault();
     let data = Object.fromEntries(new FormData(e.target).entries());
     let handler = new FormHandler(data);
@@ -80,7 +79,8 @@ document.getElementById("mode").addEventListener('change', (e) => {
         document.querySelector('.search_name').value = '';
         document.querySelector('.input_name').classList.add("close");
         document.querySelector('.include').classList.remove("close");
-    } else {
+    }
+    else {
         document.querySelector('.input_name').classList.remove("close");
         document.querySelector('.include').classList.add("close");
         let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
@@ -88,20 +88,11 @@ document.getElementById("mode").addEventListener('change', (e) => {
         let checkboxes = new CheckboxHandler(document.querySelectorAll('.check'));
         checkboxes.checkboxesOff()
     }
-})
 
-document.querySelectorAll(".check")[0].addEventListener('change', (e) => toggleCheck(e, 0))
-document.querySelectorAll(".check")[1].addEventListener('change', (e) => toggleCheck(e, 1))
+});
 
-function toggleCheck(e, i) {
-    if (e.target.checked) {
-        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
-        classToggle.divTargetShow(i);
-    } else {
-        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
-        classToggle.divTargetHide(i);
-    }
-}
+document.querySelectorAll(".check")[0].addEventListener('change', (e) => toggleCheck(e, 0));
+document.querySelectorAll(".check")[1].addEventListener('change', (e) => toggleCheck(e, 1));
 
 document.querySelector('.show').onclick = () => {
     let checkboxes = new CheckboxHandler(document.querySelectorAll(".check"));
@@ -112,22 +103,36 @@ document.querySelector('.show').onclick = () => {
     if (input == '') input = false;
 
     let filter;
+
     if (input) {
         filter = new FilterInput(sort, key, input);
 
-    } else if (checkOn) {
+    }
+    else if (checkOn) {
         filter = new FilterCheck(sort, checkOn);
 
-    } else {
+    }
+    else {
         filter = new Filter(sort);
     }
+
     let config = JSON.stringify(filter.filterOn())
     let set = new DataСollector(db, config);
     let resultJSON = new ReaderByRequest(set.creatingRequest());
     let show = new Show(resultJSON.getRequestObj(), document.querySelectorAll('.profiles'))
     show.showHide()
     show.showCreateDiv();
-}
+};
+
+function toggleCheck(e, i) {
+    if (e.target.checked) {
+        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
+        classToggle.divTargetShow(i);
+    } else {
+        let classToggle = new ClassToggle(document.querySelectorAll('.extraOption'));
+        classToggle.divTargetHide(i);
+    }
+};
 
 //third Task
 import QuestionsSet from './thirdTask/QuestionsSet.js'

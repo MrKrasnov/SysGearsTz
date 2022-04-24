@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background: #edf3f0;
 }
 
 p {
@@ -29,12 +30,12 @@ p {
     display: flex;
 }
 
-.source {
-    margin-left: 40px;
-}
-
 #second_task select {
     display: block;
+}
+
+#second_form {
+    border: 1px solid orangered;
 }
 
 #second_form input,

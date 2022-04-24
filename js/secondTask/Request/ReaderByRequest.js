@@ -14,7 +14,8 @@ export default class ReaderByRequest {
                 "result": [],
             };
             return JSON.stringify(result);
-        } else if (config.hasOwnProperty(["include"])) {
+        }
+        else if (config.hasOwnProperty(["include"])) {
             let include = config["include"][0];
             let key = Object.keys(include)[0];
             let prop = include[key];
@@ -32,7 +33,8 @@ export default class ReaderByRequest {
             };
 
             return sortItems(result["result"]);
-        } else if (config.hasOwnProperty(["exclude"])) {
+        }
+        else if (config.hasOwnProperty(["exclude"])) {
             let exclude = config["exclude"];
 
             let extraSetting = {};
@@ -41,7 +43,8 @@ export default class ReaderByRequest {
             }
 
             return sortItems(obj["data"], extraSetting);
-        } else {
+        }
+        else {
             return sortItems(obj["data"]);
         }
 
