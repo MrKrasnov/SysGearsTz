@@ -130,10 +130,10 @@ document.querySelector('.show').onclick = () => {
 }
 
 //third Task
-import QuestionsSet from './thirdTask/firstPath/QuestionsSet.js'
-import { questions } from './thirdTask/firstPath/questions.js';
+import QuestionsSet from './thirdTask/QuestionsSet.js'
+import { questions } from './thirdTask/questions.js';
 
 document.querySelector('.third_task').onclick = () => {
     const questionsSet = new QuestionsSet(JSON.stringify(questions));
-    console.log(questionsSet);
+    questionsSet.createScenaries();
 }
